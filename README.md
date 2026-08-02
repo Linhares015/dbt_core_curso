@@ -4,10 +4,22 @@ A fully local dbt Core + DuckDB reference project for the Udemy course **dbt Cor
 
 ## Prerequisites
 
-- Python 3.13+
-- `uv` (recommended) or a Python virtual-environment tool
+- Python 3.10–3.13
+- `uv` package manager
 
-## Reproduce from a clean checkout
+## Fastest setup
+
+See [SETUP.md](SETUP.md) for Windows, macOS and Linux instructions.
+
+After cloning, run one command to install dependencies, validate the local dbt profile, load sample data, and execute every model/test:
+
+```bash
+python3 scripts/setup_course.py --verify
+```
+
+On Windows PowerShell, use `py scripts/setup_course.py --verify`.
+
+## Manual reproduction
 
 ```bash
 uv sync

@@ -2,7 +2,7 @@
 name = "northstar-analytics-dbt-capstone"
 version = "1.0.0"
 description = "Local dbt Core and DuckDB reference project for the Udemy dbt Core course."
-requires-python = ">=3.13,<3.14"
+requires-python = ">=3.10,<3.14"
 dependencies = [
   "dbt-core==1.12.0",
   "dbt-duckdb==1.10.1",
