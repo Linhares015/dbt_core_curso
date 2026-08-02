@@ -1,0 +1,13 @@
+# Local environment and generated dbt artifacts
+.venv/
+target/
+logs/
+dbt_packages/
+*.duckdb
+.user.yml
+
+# Python/editor noise
+__pycache__/
+*.py[cod]
+.DS_Store
+.vscode/

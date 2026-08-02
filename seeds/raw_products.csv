@@ -1,0 +1,5 @@
+product_id,product_name,category,unit_cost
+P01,Analytics Handbook,Books,25.00
+P02,SQL Sticker Pack,Accessories,5.00
+P03,Data Modeling Course,Digital,2.00
+P04,dbt Quickstart Guide,Books,12.00

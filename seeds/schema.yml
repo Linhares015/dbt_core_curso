@@ -1,0 +1,11 @@
+version: 2
+
+seeds:
+  - name: raw_customers
+    description: Synthetic customer records for the Northstar Analytics capstone.
+  - name: raw_orders
+    description: Synthetic order records for the Northstar Analytics capstone.
+  - name: raw_order_items
+    description: Synthetic line-item records for the Northstar Analytics capstone.
+  - name: raw_products
+    description: Synthetic product records for the Northstar Analytics capstone.

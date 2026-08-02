@@ -1,0 +1,7 @@
+northstar_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: northstar.duckdb
+      threads: 4

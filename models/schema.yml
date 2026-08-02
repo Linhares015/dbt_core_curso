@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Cleaned customer records from the raw operational export.
+    columns:
+      - name: customer_id
+        description: Stable customer identifier.
+        data_tests: [not_null, unique]
+  - name: stg_orders
+    description: Cleaned order records from the raw operational export.
+    columns:
+      - name: order_id
+        description: Stable order identifier.
+        data_tests: [not_null, unique]
+      - name: customer_id
+        description: Customer who placed the order.
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+      - name: order_status
+        description: Normalized operational order status.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['completed', 'pending', 'cancelled']
+  - name: stg_order_items
+    description: Cleaned line items belonging to orders.
+    columns:
+      - name: order_item_id
+        data_tests: [not_null, unique]
+      - name: order_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_orders')
+                field: order_id
+      - name: product_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_products')
+                field: product_id
+  - name: stg_products
+    description: Cleaned product catalogue.
+    columns:
+      - name: product_id
+        data_tests: [not_null, unique]
+  - name: int_orders_enriched
+    description: Order-level records enriched with item-level quantities and revenue.
+  - name: dim_customers
+    description: Analytics-ready customer dimension.
+    columns:
+      - name: customer_id
+        data_tests: [not_null, unique]
+  - name: fct_orders
+    description: Analytics-ready fact table at one row per order.
+    columns:
+      - name: order_id
+        data_tests: [not_null, unique]
+      - name: customer_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+      - name: order_total
+        description: Order total including tax and discounts.
+  - name: mart_customer_lifetime_value
+    description: Customer-level order and completed revenue metrics.
+  - name: mart_product_revenue
+    description: Product-level completed revenue, cost and gross-profit metrics.

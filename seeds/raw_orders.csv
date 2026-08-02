@@ -1,0 +1,6 @@
+order_id,customer_id,order_date,status,subtotal,discount,tax,total
+O1001,C001,2025-03-01,completed,100.00,10.00,9.00,99.00
+O1002,C001,2025-03-15,completed,50.00,0.00,5.00,55.00
+O1003,C002,2025-03-20,completed,80.00,5.00,7.50,82.50
+O1004,C003,2025-04-01,pending,120.00,0.00,12.00,132.00
+O1005,C004,2025-04-05,cancelled,40.00,0.00,4.00,44.00
