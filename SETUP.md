@@ -9,7 +9,7 @@ The repository includes `scripts/setup_course.py`. It:
 1. checks your Python version;
 2. installs the project’s locked dependencies through `uv sync`;
 3. confirms that dbt can read `profiles.yml` and connect to local DuckDB;
-4. with `--verify`, loads the sample data and runs the complete dbt build and test suite.
+4. with `--verify`, loads the sample data and validates the dbt project configuration without requiring the final course models.
 
 ## Requirements
 
@@ -61,7 +61,7 @@ Expected final message:
 SUCCESS: Your dbt Core + DuckDB course environment is ready.
 ```
 
-The verification runs the seeds, models, and tests. A successful reference project ends with `PASS=31` and no warnings or errors.
+The verification loads the synthetic datasets and confirms the dbt project parses correctly. At the start of the course, final models and tests are intentionally not present yet.
 
 ## Faster daily setup
 

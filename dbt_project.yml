@@ -10,12 +10,3 @@ macro-paths: ['macros']
 analysis-paths: ['analyses']
 target-path: 'target'
 clean-targets: ['target', 'dbt_packages']
-
-models:
-  northstar_analytics:
-    staging:
-      +materialized: view
-    intermediate:
-      +materialized: view
-    marts:
-      +materialized: table

@@ -39,12 +39,12 @@ def dbt_executable() -> Path:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Create the course environment and optionally validate the full dbt project."
+        description="Create the course environment and optionally validate the starter project configuration."
     )
     parser.add_argument(
         "--verify",
         action="store_true",
-        help="also run dbt seed and dbt build after dependency installation",
+        help="also load sample data and validate the dbt project configuration",
     )
     parser.add_argument(
         "--no-sync",
@@ -81,7 +81,7 @@ def main() -> None:
 
     if args.verify:
         run([str(dbt), "seed", "--profiles-dir", "."])
-        run([str(dbt), "build", "--profiles-dir", "."])
+        run([str(dbt), "parse", "--profiles-dir", "."])
 
     print("\nSUCCESS: Your dbt Core + DuckDB course environment is ready.")
     if not args.verify:
