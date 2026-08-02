@@ -1,36 +1,31 @@
-# Capstone Exercise Checklist
+# Checklist do Exercício Capstone
 
-## Deliverable
+## Entrega
 
-Build a documented, tested dbt project that turns the synthetic Northstar Analytics data into trustworthy customer and product analytics.
+Construa um projeto dbt documentado e testado que transforme os dados sintéticos da Northstar Analytics em modelos confiáveis de clientes, pedidos e produtos.
 
-## Required models
+## Modelos obrigatórios
 
-- [ ] `stg_customers`
-- [ ] `stg_orders`
-- [ ] `stg_order_items`
-- [ ] `stg_products`
-- [ ] `int_orders_enriched`
-- [ ] `dim_customers`
-- [ ] `fct_orders`
-- [ ] Customer lifetime value mart
-- [ ] Product revenue mart
+- Sources para os quatro arquivos brutos.
+- Modelos staging para clientes, pedidos, itens de pedido e produtos.
+- Modelo intermediate que centraliza enriquecimento de pedidos.
+- `dim_customers`.
+- `fct_orders`.
+- Um mart de valor do cliente.
+- Um mart de receita/produto.
 
-## Required quality work
+## Qualidade obrigatória
 
-- [ ] Document the sources.
-- [ ] Add descriptions for each mart and essential columns.
-- [ ] Add uniqueness and not-null tests for entity keys.
-- [ ] Add relationship tests for the customer/order/product relationships.
-- [ ] Add accepted-values testing for order status.
-- [ ] Add one custom test for a business rule.
+- Chaves importantes com `not_null` e `unique`.
+- Relações principais com testes de relacionamento.
+- Status de pedido com valores aceitos.
+- Pelo menos uma regra de negócio em teste SQL customizado.
+- Modelos e colunas importantes documentados.
 
-## Final verification
+## Critério de aceite
 
-```bash
-.venv/bin/dbt seed --profiles-dir .
-.venv/bin/dbt build --profiles-dir .
-.venv/bin/dbt docs generate --profiles-dir .
-```
+Em um checkout limpo, o projeto deve configurar, carregar seeds, executar modelos/testes e gerar documentação sem erros esperados. Explique o grão de cada mart e as regras de negócio aplicadas.
 
-Your project is complete when all intended models and tests pass, generated documentation shows lineage, and a new learner can follow your README from a clean checkout.
+## Regra
+
+Não procure a solução antes de tentar. Use o erro, o guia de dados e os checkpoints como material de aprendizagem.

@@ -1,52 +1,43 @@
-# Learning Path
+# Caminho de Aprendizagem
 
-Use this repository in sequence with the lessons. Each stage has a clear checkpoint before moving forward.
+Siga o curso em sequência. Cada marco representa uma evolução do projeto Northstar Analytics.
 
-## 1. Environment and raw data
+## 1. Ambiente e dados brutos
 
-- Run `python3 scripts/setup_course.py --verify`.
-- Open the seed CSV files in `seeds/`.
-- Run `dbt seed --profiles-dir .`.
-- Inspect the raw seed tables in DuckDB.
+- Rode `python3 scripts/setup_course.py --verify` (Windows: `py`).
+- Entenda `DATA_GUIDE.md`.
+- Identifique grão, chaves e status dos quatro datasets.
 
-**Checkpoint:** `dbt debug` succeeds and the four seed files load successfully.
+## 2. Sources e staging
 
-## 2. Sources and staging
+- Declare sources em YAML.
+- Crie modelos staging limpos.
+- Use `ref()` para dependências.
 
-- Review `models/sources.yml`.
-- Build `stg_customers`, `stg_orders`, `stg_order_items`, and `stg_products` in `models/staging/`.
-- Standardize column names, types, dates, and order status.
+## 3. Modelagem em camadas
 
-**Checkpoint:** each staging model builds and has one clear responsibility.
+- Crie um modelo intermediate para regras de negócio.
+- Crie dimensão de clientes e fato de pedidos.
+- Construa marts de cliente e produto/receita.
 
-## 3. Dependencies and intermediate logic
+## 4. Qualidade e documentação
 
-- Use `ref()` rather than hard-coded table names.
-- Create `int_orders_enriched` in `models/intermediate/`.
-- Aggregate item quantity and line revenue at order level.
+- Adicione testes genéricos e customizados.
+- Documente modelos e colunas.
+- Gere documentação e navegue o lineage.
 
-**Checkpoint:** the model graph shows the source-to-order dependency flow.
+## 5. Execução e depuração
 
-## 4. Analytics marts
+- Escolha entre `run`, `test` e `build`.
+- Rode subconjuntos de modelos.
+- Isole e corrija erros de SQL, configuração e qualidade.
 
-- Create `dim_customers` and `fct_orders`.
-- Create customer-lifetime-value and product-revenue marts.
-- Choose model materializations deliberately.
+## 6. Capstone
 
-**Checkpoint:** the marts answer customer and product/revenue questions using clean dependencies.
+- Entregue o projeto documentado, testado e reproduzível.
+- Valide em ambiente limpo.
+- Explique decisões, trade-offs e próximos passos.
 
-## 5. Reuse and data quality
+## Checkpoint inicial
 
-- Add a small reusable macro under `macros/`.
-- Add generic tests in a model `schema.yml` file.
-- Add one custom business-rule test under `tests/`.
-
-**Checkpoint:** `dbt build --profiles-dir .` passes with your models and tests.
-
-## 6. Documentation and final delivery
-
-- Add descriptions for exposed models and key columns.
-- Run `dbt docs generate --profiles-dir .`.
-- Review the lineage graph and complete the capstone checklist in `exercises/README.md`.
-
-**Checkpoint:** a clean clone can install, seed, build, test, and generate docs using your instructions.
+Antes de avançar, confirme `dbt debug`, `dbt seed` e `dbt parse` funcionando e explique o grão de cada seed.

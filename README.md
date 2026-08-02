@@ -1,51 +1,54 @@
-# dbt_core_curso — Starter Repository
+# dbt_core_curso — Repositório Starter do Aluno
 
-This is the **student workspace** for the Udemy course **dbt Core for Data Analysts**. It contains the environment automation, synthetic data, guided exercises, and empty folders where you will build the project lesson by lesson.
+Este é o ambiente prático do curso **dbt Core para Analistas de Dados**. Ele contém automações de ambiente, dados sintéticos, exercícios e guias — mas não contém as respostas finais do projeto.
 
-> Do not expect the final models to be present on day one. You will create them during the course.
+## O que você vai construir
 
-## Start here
+Você atuará como analytics engineer da empresa fictícia Northstar Analytics. A jornada transforma dados brutos de clientes, pedidos, itens de pedido e produtos em modelos de analytics testados e documentados.
 
-1. Read [SETUP.md](SETUP.md).
-2. Clone this repository.
-3. Run the setup assistant:
+## Configuração rápida
 
-   **macOS/Linux**
-   ```bash
-   python3 scripts/setup_course.py --verify
-   ```
+Leia o [SETUP.md](SETUP.md) para instruções de Windows, macOS e Linux.
 
-   **Windows PowerShell**
-   ```powershell
-   py scripts/setup_course.py --verify
-   ```
-
-4. Follow [LEARNING_PATH.md](LEARNING_PATH.md) alongside the course lessons.
-5. Use [DATA_GUIDE.md](DATA_GUIDE.md) to understand the synthetic datasets.
-
-## What is included
-
-- `seeds/`: synthetic e-commerce data used throughout the lessons.
-- `models/sources.yml`: source declarations for the raw data.
-- `models/staging/`, `models/intermediate/`, `models/marts/`: folders where you write models during the course.
-- `macros/`: folder for reusable Jinja macros.
-- `tests/`: folder for custom data tests.
-- `exercises/`: guided task specifications and checkpoints.
-- `scripts/`: environment setup and reset automation.
-
-## Reset your local work
-
-To reset generated data, the local DuckDB database, target artifacts, and logs while preserving your source files:
-
+macOS/Linux:
 ```bash
-python3 scripts/reset_course.py
+python3 scripts/setup_course.py --verify
 ```
 
-On Windows, use `py scripts/reset_course.py`.
+Windows PowerShell:
+```powershell
+py scripts/setup_course.py --verify
+```
 
-## Important
+O comando cria o ambiente local, valida a conexão dbt/DuckDB, carrega dados sintéticos e valida a estrutura inicial do projeto.
 
-- All data is synthetic and safe for local practice.
-- `profiles.yml` is preconfigured for a local DuckDB file: no credentials or cloud account are required.
-- Do not commit `.venv/`, `northstar.duckdb`, `target/`, or `logs/`; they are ignored already.
-- The complete instructor solution is intentionally not part of this student branch.
+## Estrutura
+
+- `seeds/`: dados sintéticos de entrada.
+- `models/`: onde você criará staging, intermediate e marts.
+- `macros/`: helpers Jinja reutilizáveis.
+- `tests/`: testes de qualidade de dados.
+- `exercises/`: checklist do capstone.
+- `scripts/`: automação de setup e reset.
+- `DATA_GUIDE.md`: grão, chaves e regras dos dados.
+- `LEARNING_PATH.md`: sequência do curso e checkpoints.
+
+## Comandos úteis
+
+```bash
+python3 scripts/setup_course.py --verify
+python3 scripts/reset_course.py --reseed
+.venv/bin/dbt debug --profiles-dir .
+.venv/bin/dbt seed --profiles-dir .
+.venv/bin/dbt parse --profiles-dir .
+```
+
+No Windows, use os scripts com `py`; o executável dbt fica em `.venv\Scripts\dbt.exe`.
+
+## Suporte
+
+Ao pedir ajuda, envie: sistema operacional, versão do Python, `uv --version`, comando completo e todo o texto do erro. Não envie apenas um recorte da última linha.
+
+## Regra de aprendizado
+
+Construa cada etapa antes de procurar a referência final. O valor do curso está em tomar decisões, testar hipóteses, errar com segurança e entender o projeto — não apenas copiar SQL.

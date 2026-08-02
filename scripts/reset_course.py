@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Remove generated local dbt artifacts without touching a learner's source work."""
+"""Remove artefatos dbt locais gerados sem tocar no código do aluno."""
 
 from __future__ import annotations
 
@@ -21,25 +21,20 @@ def remove(path: Path) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Reset generated local course artifacts.")
-    parser.add_argument(
-        "--reseed",
-        action="store_true",
-        help="run the setup assistant's verification after the cleanup",
-    )
+    parser = argparse.ArgumentParser(description="Reinicia os artefatos locais gerados pelo curso.")
+    parser.add_argument("--reseed", action="store_true", help="executa a verificação do setup depois da limpeza")
     args = parser.parse_args()
 
     for relative_path in GENERATED_PATHS:
-        path = ROOT / relative_path
-        remove(path)
-        print(f"Removed (if present): {relative_path}")
+        remove(ROOT / relative_path)
+        print(f"Removido (se existia): {relative_path}")
 
     if args.reseed:
         command = [sys.executable, "scripts/setup_course.py", "--verify"]
         print(f"\n$ {' '.join(command)}")
         raise SystemExit(subprocess.run(command, cwd=ROOT).returncode)
 
-    print("\nSUCCESS: Generated local artifacts were removed. Your models, macros, tests, and notes remain unchanged.")
+    print("\nSUCESSO: Artefatos locais gerados foram removidos. Seus modelos, macros, testes e anotações não foram alterados.")
 
 
 if __name__ == "__main__":

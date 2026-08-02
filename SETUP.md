@@ -1,112 +1,75 @@
-# Environment Setup Guide
+# Guia de Configuração
 
-This course uses **dbt Core + DuckDB locally**. You do not need a cloud warehouse account, database password, API key, or paid service.
+O curso usa **dbt Core + DuckDB localmente**. Você não precisa de conta cloud, senha de banco, API key ou serviço pago.
 
-## What the setup assistant does
-
-The repository includes `scripts/setup_course.py`. It:
-
-1. checks your Python version;
-2. installs the project’s locked dependencies through `uv sync`;
-3. confirms that dbt can read `profiles.yml` and connect to local DuckDB;
-4. with `--verify`, loads the sample data and validates the dbt project configuration without requiring the final course models.
-
-## Requirements
+## Requisitos
 
 - Git
-- Python **3.10, 3.11, 3.12, or 3.13**
-- `uv` package manager
+- Python 3.10, 3.11, 3.12 ou 3.13
+- [uv](https://docs.astral.sh/uv/)
 
-No credentials are required: `profiles.yml` already points to a local `northstar.duckdb` file.
+## Instale uv
 
-## Install `uv`
+Consulte as instruções oficiais: https://docs.astral.sh/uv/getting-started/installation/
 
-Use the official instructions at https://docs.astral.sh/uv/getting-started/installation/.
-
-Common commands:
-
-### Windows PowerShell
-
-```powershell
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-```
-
-Close and reopen PowerShell after installation.
-
-### macOS or Linux
-
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-```
-
-Close and reopen the terminal after installation if `uv --version` is not found.
-
-## One command after cloning
-
-### macOS/Linux
-
-```bash
-python3 scripts/setup_course.py --verify
-```
-
-### Windows PowerShell
-
-```powershell
-py scripts/setup_course.py --verify
-```
-
-Expected final message:
-
-```text
-SUCCESS: Your dbt Core + DuckDB course environment is ready.
-```
-
-The verification loads the synthetic datasets and confirms the dbt project parses correctly. At the start of the course, final models and tests are intentionally not present yet.
-
-## Faster daily setup
-
-After the first successful install, run without `--verify` when you only want to confirm the environment:
-
-```bash
-python3 scripts/setup_course.py
-```
-
-## Troubleshooting
-
-### `uv is required but was not found`
-
-Install `uv`, reopen your terminal, and confirm it with:
+Depois de instalar, feche e abra o terminal e confirme:
 
 ```bash
 uv --version
 ```
 
-### Python version error
+## Configure e valide o projeto
 
-Install Python 3.10–3.13, reopen the terminal, and check:
+Clone pelo HTTPS:
 
 ```bash
-python3 --version
+git clone https://github.com/Linhares015/dbt_core_curso.git
+cd dbt_core_curso
 ```
 
-On Windows use `py --version`.
-
-### dbt connection/debug fails
-
-Start from a clean local database and run the complete setup again:
-
+macOS/Linux:
 ```bash
-rm -f northstar.duckdb
 python3 scripts/setup_course.py --verify
 ```
 
-On Windows PowerShell:
-
+Windows PowerShell:
 ```powershell
-Remove-Item northstar.duckdb -ErrorAction SilentlyContinue
 py scripts/setup_course.py --verify
 ```
 
-### Something still fails
+O script executa `uv sync`, `dbt debug`, `dbt seed` e `dbt parse`. No início do curso, os modelos finais ainda não existem: você os criará durante as aulas.
 
-Copy the full terminal output into the course support channel, together with your operating system and `python --version` / `uv --version` output.
+## Resultado esperado
+
+Você deve ver:
+
+```text
+All checks passed!
+SUCCESS: Seu ambiente do curso dbt Core + DuckDB está pronto.
+```
+
+## Erros frequentes
+
+### `uv` não encontrado
+
+Instale uv pelo link oficial acima, reabra o terminal e rode `uv --version`.
+
+### Versão de Python incompatível
+
+Use Python 3.10–3.13. Feche/reabra o terminal após instalar a versão correta.
+
+### Falha no dbt debug
+
+Confirme que está na raiz do repositório e rode novamente sem `--no-sync`.
+
+### Quero recomeçar o banco local
+
+```bash
+python3 scripts/reset_course.py --reseed
+```
+
+Isso remove banco e artefatos gerados, mas preserva seu SQL e seus exercícios.
+
+## Como pedir ajuda
+
+Envie sistema operacional, versão do Python, versão do uv, comando completo e erro completo. Nunca envie senhas ou tokens.
