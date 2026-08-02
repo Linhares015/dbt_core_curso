@@ -1,6 +1,6 @@
-# Northstar Analytics — dbt Core Capstone
+# dbt_core_curso — Northstar Analytics Capstone
 
-A fully local dbt Core + DuckDB reference project for CURSO-001.
+A fully local dbt Core + DuckDB reference project for the Udemy course **dbt Core for Data Analysts**.
 
 ## Prerequisites
 
